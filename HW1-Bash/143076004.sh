@@ -1,5 +1,10 @@
 #!/bin/bash
-#generates final output
+###
+# Exercise 1: 
+# Name: Vishwanathan Iyer
+# Roll No: 143076004
+# Assumptions: partB.csv contains only entries of those students who have score of >=20 in partA.
+###
 echo "Sr.Num.,RollNum,part A,part B,Total,IsTied:Yes-No">final-output.csv
 awk -F, 'NR==FNR{partB[$1]=$2;
 				  rollNum[$1]=$1;
