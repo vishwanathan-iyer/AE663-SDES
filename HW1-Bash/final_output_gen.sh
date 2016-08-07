@@ -47,11 +47,11 @@ awk -F, 'NR==FNR{partB[$1]=$2;
 	awk -F, '{
 				if($5 =="Yes" || $6=="Yes")
 				{
-					print $2","$3","$1","$4",Yes"
+					print NR","$2","$3","$1","$4",Yes"
 				}
 				else
 				{
-					print $2","$3","$1","$4",No"
+					print NR","$2","$3","$1","$4",No"
 				} 
 		}' final_output.csv
 		
