@@ -27,12 +27,32 @@ awk -F, 'NR==FNR{partB[$1]=$2;
 				}' | paste - - | tr -d "\r" | tr "\t" ","  |sort -t, -nr -k3 | awk -F, '{
 					if(!NF || !seen[$4]++)
 					{
-							print $0",No"
+						print $0",No"
 					}
 					else
 					{
-							print $0",Yes"
+						print $0",Yes"
 					}
-					
-					}' 
+				}' | sort -t, -r -k5 | awk -F, '{
+					if(!NF || !seen[$4]++)
+					{
+						print $0",xx"
+					}
+					else
+					{
+						print $0",Yes"
+					}					
+					}' | sort -t, -r -k4 > final_output.csv
+	
+	awk -F, '{
+				if($5 =="Yes" || $6=="Yes")
+				{
+					print $2","$3","$1","$4",Yes"
+				}
+				else
+				{
+					print $2","$3","$1","$4",No"
+				} 
+		}' final_output.csv
+		
 
