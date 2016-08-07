@@ -4,25 +4,25 @@
 # Name: Vishwanathan Iyer
 # Roll No: 143076004
 ###
-for i in $(ls | egrep [0-9,R,D,P]| grep ".sh")
+for i in $(ls | egrep [0-9]| grep ".sh")
 do
 	dir=${i:0:9}
 	mkdir -p "$dir" &&
 	mv "$i" "$dir" 
 done
 
-for j in $(ls | egrep [0-9,R,D,P])
+for j in $(ls | egrep [0-9] )
 do
-	cp "./data/partA.csv" "./$j/"
-	cp "./data/partB.csv" "./$j/"
-	cp "./data/final-output-template.csv" "./$j/"
+	cp "./data/partA.csv" "./$j/" 2>/dev/null
+	cp "./data/partB.csv" "./$j/" 2>/dev/null
+	cp "./data/final-output-template.csv" "./$j" 2>/dev/null
 done
 
-for k in $(ls | egrep [0-9,R,D,P])
+for k in $(ls | egrep [0-9])
 do
-	cd $k
-	sh "./$k.sh"
-	check=$(diff -s "final-output.csv" "final-output-template.csv" | cut -d' ' -f6 )
+	cd $k 2>/dev/null
+	sh "./$k.sh" 2>/dev/null
+	check=$(diff -s "final-output.csv" "final-output-template.csv" 2>/dev/null | cut -d' ' -f6 )
 	if [ "$check" == "identical" ]
 	then
 		echo "$k,10" >> ../rollnum-marks.csv
