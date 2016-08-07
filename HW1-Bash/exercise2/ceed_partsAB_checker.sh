@@ -1,4 +1,5 @@
 #bin/bash
+
 for i in $(ls | egrep [0-9,R,D,P]| grep ".sh")
 do
 dir=${i:0:9}
@@ -26,7 +27,3 @@ echo "$k,0" >> ../rollnum-marks.csv
 fi
 cd ..
 done
-
-
-
-

@@ -1,7 +1,6 @@
 #!/bin/bash
 #generates final output
-#echo "Sr.Num.,RollNum,Name,part A,part B,Total,IsTied:Yes-No" > final_output.csv
-sr=1
+echo "Sr.Num.,RollNum,part A,part B,Total,IsTied:Yes-No">final-output.csv
 awk -F, 'NR==FNR{partB[$1]=$2;
 				  rollNum[$1]=$1;
 				  #print $1"....." $1;
@@ -42,9 +41,7 @@ awk -F, 'NR==FNR{partB[$1]=$2;
 					{
 						print $0",Yes"
 					}					
-					}' | sort -t, -r -k4 > final_output.csv
-	
-	awk -F, '{
+					}' | sort -t, -r -k4 | awk -F, '{
 				if($5 =="Yes" || $6=="Yes")
 				{
 					print NR","$2","$3","$1","$4",Yes"
@@ -53,6 +50,8 @@ awk -F, 'NR==FNR{partB[$1]=$2;
 				{
 					print NR","$2","$3","$1","$4",No"
 				} 
-		}' final_output.csv
-		
+		}' >> final-output.csv 
+
+echo "Number of candidates in part A =" $(wc -l partA.csv | cut -d' ' -f1)  >>stastistics.txt
+echo "Number of candidates in part B =" $(wc -l partB.csv | cut -d' ' -f1)  >>stastistics.txt
 
