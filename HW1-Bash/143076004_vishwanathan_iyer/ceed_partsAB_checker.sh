@@ -4,6 +4,7 @@
 # Name: Vishwanathan Iyer
 # Roll No: 143076004
 ###
+echo "rollnum,mark" > rollnum-marks.csv
 for i in $(ls | egrep [0-9]| grep ".sh")
 do
 	dir=${i:0:9}
@@ -17,7 +18,6 @@ do
 	cp "./data/partB.csv" "./$j/" 2>/dev/null
 	cp "./data/final-output-template.csv" "./$j" 2>/dev/null
 done
-
 for k in $(ls | egrep [0-9])
 do
 	cd $k 2>/dev/null
