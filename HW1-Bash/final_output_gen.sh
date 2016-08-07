@@ -20,10 +20,19 @@ awk -F, 'NR==FNR{partB[$1]=$2;
 				
 			 }
 			 
-			}' partB.csv partA.csv | paste - - | tr -d "\r" | tr "\t" ","  > final_output.csv
-			
-			 awk -F, '{
+			}' partB.csv partA.csv | paste - - | tr -d "\r" | tr "\t" ","  | awk -F, '{
 					print $0
 					print $1+$3
-				}' final_output.csv | paste - - | tr -d "\r" | tr "\t" "," | sort -t, -nr -k3 | cut -d, -f4 | uniq -c | paste final_output.csv - 
+					close("final_output.csv")
+				}' | paste - - | tr -d "\r" | tr "\t" ","  |sort -t, -nr -k3 | awk -F, '{
+					if(!NF || !seen[$4]++)
+					{
+							print $0",No"
+					}
+					else
+					{
+							print $0",Yes"
+					}
+					
+					}' 
 
