@@ -21,7 +21,7 @@ done
 for k in $(ls | egrep [0-9])
 do
 	cd $k 2>/dev/null
-	sh "./$k.sh" 2>/dev/null
+	bash "./$k.sh" 2>/dev/null
 	check=$(diff -s "final-output.csv" "final-output-template.csv" 2>/dev/null | cut -d' ' -f6 )
 	if [ "$check" == "identical" ]
 	then
